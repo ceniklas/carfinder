@@ -1,25 +1,28 @@
 import * as request from 'superagent';
+import { Car, PrismaClient } from '@prisma/client'
+
 
 const cars = [
     'LWY634',
-    'JLF197',
-    'NZB630',
+    // 'JLF197',
+    // 'NZB630',
 ];
 
 console.log('------------ Cars ------------');
 cars.forEach(async car => {
     const response1 = await request.get(`https://bilskatt.nu/${car}`)
-    //const response2 = await superagent.get(`https://www.compricer.se/ajax/vehicle-data/?registernumber=${car}`)
+    const response2 = await request.get(`https://www.compricer.se/ajax/vehicle-data/?registernumber=${car}`)
     const response3 = await request.get(`https://bilskatt.nu/autocomplete/${car}`)
     //const response4 = await superagent.get(`https://biluppgifter.se/fordon/${car}`)
     const response5 = await request.get(`https://api.bytbil.com/blocket-basedata-api/v2/vehicles/${car}/blocket-ai-base-data`)
 
     const carAttr = JSON.parse(response5.text).data.attributes;
+    console.log(carAttr)
     const carName = carAttr.blocket_heading // `Model: ${JSON.parse(response2.text).Data.Result.Model} (${car})`;
     const fuel = carAttr.fuel;
     const modelYear = carAttr.model_year;
     const gearBox = carAttr.gearbox;
-    const distanceInKm = carAttr.predicted_milage;
+    const distanceInKm = parseInt(carAttr.predicted_milage ?? 0, 10);
     const carValue = carAttr.private_valuation ? (carAttr.private_valuation + carAttr.company_valuation) / 2 : 0;
 
     const ensurance = parseBilskattDotNu(response1.text);
@@ -32,6 +35,29 @@ cars.forEach(async car => {
     console.log(`Värde: ${carValue}`);
     console.log(ensurance);
     console.log();
+
+    const prisma = new PrismaClient();
+
+    const c1 = await prisma.car.findMany();
+    if (!c1.some(c => c.car_id == car)) {
+        const newCar = await prisma.car.create({
+            data: {
+                car_id: car,
+                ensurance: [ensurance],
+                fuel,
+                gearbox: gearBox,
+                manufacturer: JSON.parse(response2.text).Data.Result.Model,
+                milage: distanceInKm,
+                name: carName,
+                tax: parseInt(JSON.parse(response3.text)[0].skatt, 10),
+                value: carValue,
+                year: modelYear,
+            }
+        });
+    }
+
+    console.log(JSON.stringify(c1))
+    prisma.$disconnect().then(() => { console.log('Disconnected.') })
 })
 
 const parseBilskattDotNu = (responseText: string) => {
