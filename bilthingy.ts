@@ -3,9 +3,10 @@ import { Car, PrismaClient } from '@prisma/client'
 
 
 const cars = [
+    'BNF713',
     'LWY634',
-    // 'JLF197',
-    // 'NZB630',
+    'JLF197',
+    'NZB630',
 ];
 
 console.log('------------ Cars ------------');
@@ -23,7 +24,7 @@ cars.forEach(async car => {
     const modelYear = carAttr.model_year;
     const gearBox = carAttr.gearbox;
     const distanceInKm = parseInt(carAttr.predicted_milage ?? 0, 10);
-    const carValue = carAttr.private_valuation ? (carAttr.private_valuation + carAttr.company_valuation) / 2 : 0;
+    const carValue = Math.floor(carAttr.private_valuation ? (carAttr.private_valuation + carAttr.company_valuation) / 2 : 0);
 
     const ensurance = parseBilskattDotNu(response1.text);
     //const bilUppg = await parseBiluppgifterDotSe(response4.text);
