@@ -1,25 +1,24 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+generator client {
+  provider = "prisma-client-js"
+}
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-generator client {
-  provider = "prisma-client-js"
-}
-
 model Car {
-  id           Int      @id @default(autoincrement())
-  car_id       String   @unique
-  name         String
-  year         Int
-  manufacturer String
-  gearbox      String
-  fuel         String
-  milage       Int
-  value        Int
-  tax          Int
-  ensurance    String[]
+  id               Int      @id @default(autoincrement())
+  car_id           String   @unique
+  name             String
+  year             Int
+  manufacturer     String
+  gearbox          String
+  fuel             String
+  milage           Int
+  value            Int
+  tax              Int
+  ensurance        String[]
+  fuel_consumption Int
+  cost             Int
 }
