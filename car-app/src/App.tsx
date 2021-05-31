@@ -57,10 +57,11 @@ const App = () => {
 
   useEffect(() => {
     axios.get<Car[]>(`${baseUrl}/cars`)
-      .then(({ data }) => setCars(data));
+      .then(({ data }) => setCars(data))
+      .catch((e) => {console.log(e)});
   }, []);
 
-  const tempCar: Pick<Car, 'car_id'> = { car_id: 'WHX998' };
+
 
   return (
     <>
@@ -72,12 +73,12 @@ const App = () => {
             <img src={carImage} className="App-logo" alt="logo" />
           </div>
           <TextField
-        id="form-car-id"
-        margin="none"
-        label="Registreringsnummer"
-        value={newCar}
-        onChange={(e) => setNewCar(e.target.value)}
-      />
+            id="form-car-id"
+            margin="none"
+            label="Registreringsnummer"
+            value={newCar}
+            onChange={(e) => setNewCar(e.target.value)}
+          />
           <Button onClick={() => addCar({car_id: newCar})} color="primary" variant="contained" style={{ marginLeft: '2rem' }}>
             Add Car
           </Button>

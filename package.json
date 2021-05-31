@@ -11,12 +11,12 @@
   "devDependencies": {
     "@types/express": "^4.17.11",
     "@types/superagent": "^4.1.11",
-    "prisma": "^2.22.1",
-    "typescript": "^4.2.4",
-    "ts-node": "^10.0.0"
+    "prisma": "^2.23.0",
+    "ts-node": "^10.0.0",
+    "typescript": "^4.2.0"
   },
   "scripts": {
     "setup": "docker run --name car-finder -p 5432:5432 -e POSTGRES_PASSWORD=mysecretpassword -d postgres && yarn prisma migrate deploy",
-    "start": "yarn ts-node carApp.ts "
+    "start": "yarn ts-node carApp.ts"
   }
 }
