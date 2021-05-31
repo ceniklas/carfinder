@@ -46,7 +46,7 @@ app.post('/api/car/update', async (req, res) => {
     value: parseInt(req.body.value, 10),
     year: parseInt(req.body.year, 10),
     fuel_consumption: parseInt(req.body.fuel_consumption, 10),
-    cost: 0,
+    cost: parseInt(req.body.cost, 10),
   }
   const prisma = new PrismaClient();
   const updatedCar = await prisma.car.update({ where: { id: car.id }, data: { ...car } });

@@ -6,6 +6,7 @@ import { CarDialog } from './car-dialog.component';
 import carImage from './sports-car.svg';
 import axios from 'axios';
 import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 
 const baseUrl = 'http://localhost:4000/api';
 
@@ -27,6 +28,7 @@ const App = () => {
     fuel_consumption: 0,
     cost: 0,
   });
+  const [newCar, setNewCar] = useState<string>('');
 
   const handleOpen = (car: Car) => {
     setSelectedCar(car);
@@ -69,7 +71,14 @@ const App = () => {
             <h1>Cars</h1>
             <img src={carImage} className="App-logo" alt="logo" />
           </div>
-          <Button onClick={() => addCar(tempCar)} color="primary" variant="contained" style={{ marginLeft: '2rem' }}>
+          <TextField
+        id="form-car-id"
+        margin="none"
+        label="Registreringsnummer"
+        value={newCar}
+        onChange={(e) => setNewCar(e.target.value)}
+      />
+          <Button onClick={() => addCar({car_id: newCar})} color="primary" variant="contained" style={{ marginLeft: '2rem' }}>
             Add Car
           </Button>
         </header>

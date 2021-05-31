@@ -19,6 +19,6 @@ model Car {
   value            Int
   tax              Int
   ensurance        String[]
-  fuel_consumption Int
+  fuel_consumption Float
   cost             Int
 }

@@ -39,7 +39,7 @@ export const carScanner = async (carId: string) => {
     ensurance: [ensurance],
     fuel,
     gearbox: gearBox,
-    manufacturer: JSON.parse(response2.text).Data.Result.Model,
+    manufacturer: JSON.parse(response2.text).Data.Result?.Model || '',
     milage: distanceInKm,
     name: carName,
     tax: parseInt(JSON.parse(response3.text)[0].skatt, 10),
@@ -48,6 +48,8 @@ export const carScanner = async (carId: string) => {
     fuel_consumption: fuelConsumption,
     cost: 0,
   };
+
+  console.log(car);
 
   return car;
 };
@@ -116,5 +118,5 @@ const parseBiluppgifterDotSe = (responseText: string) => {
   // const url = 'https://biluppgifter.se/api/v1/valuation/valuate';
   // console.log(responseText)
   const textString = responseText.match(/(\d+\.+?\d+).(?:liter\/100km)/g)?.[0].split(' ')[0] ?? '';
-  return parseInt(textString, 10);
+  return parseInt(textString, 10) || 10;
 };
