@@ -8,7 +8,7 @@ import axios from 'axios';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
-const baseUrl = 'http://localhost:4000/api';
+const baseUrl = 'http://server.ceniklas.se:15432/api';
 
 const App = () => {
   const [cars, setCars] = useState<Car[]>([]);
