@@ -20,6 +20,7 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
+    "preinstall": "yarn --cwd ../server install",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -44,6 +45,6 @@
     ]
   },
   "devDependencies": {
-    "prisma": "^2.23.0"
+    "prisma": "^2.24.0"
   }
 }

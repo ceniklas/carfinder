@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import { Car } from '@prisma/client';
+import { Car } from '../../server/node_modules/@prisma/client'
 import { CarCard } from './car-card.component';
 import { CarDialog } from './car-dialog.component';
 import carImage from './sports-car.svg';
