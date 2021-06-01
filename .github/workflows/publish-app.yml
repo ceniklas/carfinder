@@ -7,8 +7,11 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-    - name: Setup
-      run: yarn install && yarn prisma generate --schema ../prisma/schema.prisma
+    - name: Setup server
+      run: touch .env && echo 'DATABASE_URL="postgresql://postgres:notarealpass@localhost:5432/carfinderdb?schema=public"' > .env && yarn install
+      working-directory: ./server
+    - name: Setup client
+      run: yarn install
       working-directory: ./car-app
     - name: Build
       run: yarn build
