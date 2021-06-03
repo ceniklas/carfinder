@@ -3,6 +3,6 @@ ENV NODE_ENV=production
 WORKDIR /usr/src/app
 COPY package*.json ./
 RUN npm install --silent
-ADD build .
+ADD build ./build
 EXPOSE 15432
-CMD ["node", "carApp.js"]
+CMD ["node", "build/carApp.js"]
