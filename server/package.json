@@ -7,7 +7,8 @@
     "build:docker": "docker build -t carfinder_image .",
     "codegen": "npx prisma generate",
     "setup": "docker run --name car-finder -p 5432:5432 -e POSTGRES_PASSWORD=mysecretpassword -d postgres && yarn prisma migrate deploy",
-    "start": "npx ts-node carApp.ts"
+    "start": "npx ts-node carApp.ts",
+    "start:backend": "docker-compose run web npx prisma db push"
   },
   "dependencies": {
     "@prisma/client": "^2.24.0",

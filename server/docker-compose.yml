@@ -1,0 +1,20 @@
+version: '3.4'
+services:
+  web:
+    image: carfinder_image
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    depends_on:
+      - postgres
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: postgresql://postgres:supersecret@postgres:5432/carfinderdb?schema=public
+    ports:
+      - 15432:15432
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: carfinderdb
+      POSTGRES_PASSWORD: supersecret
