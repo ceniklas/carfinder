@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/carfinder/static/css/main.50a8626a.chunk.css",
-    "main.js": "/carfinder/static/js/main.7a618334.chunk.js",
-    "main.js.map": "/carfinder/static/js/main.7a618334.chunk.js.map",
-    "runtime-main.js": "/carfinder/static/js/runtime-main.25ab3ea7.js",
-    "runtime-main.js.map": "/carfinder/static/js/runtime-main.25ab3ea7.js.map",
-    "static/js/2.3755c49b.chunk.js": "/carfinder/static/js/2.3755c49b.chunk.js",
-    "static/js/2.3755c49b.chunk.js.map": "/carfinder/static/js/2.3755c49b.chunk.js.map",
-    "static/js/3.582ad95b.chunk.js": "/carfinder/static/js/3.582ad95b.chunk.js",
-    "static/js/3.582ad95b.chunk.js.map": "/carfinder/static/js/3.582ad95b.chunk.js.map",
+    "main.css": "/carfinder/static/css/main.b1edfa34.chunk.css",
+    "main.js": "/carfinder/static/js/main.7f356684.chunk.js",
+    "main.js.map": "/carfinder/static/js/main.7f356684.chunk.js.map",
+    "runtime-main.js": "/carfinder/static/js/runtime-main.9a5e90eb.js",
+    "runtime-main.js.map": "/carfinder/static/js/runtime-main.9a5e90eb.js.map",
+    "static/js/2.7f0fe95a.chunk.js": "/carfinder/static/js/2.7f0fe95a.chunk.js",
+    "static/js/2.7f0fe95a.chunk.js.map": "/carfinder/static/js/2.7f0fe95a.chunk.js.map",
+    "static/js/3.556af9c5.chunk.js": "/carfinder/static/js/3.556af9c5.chunk.js",
+    "static/js/3.556af9c5.chunk.js.map": "/carfinder/static/js/3.556af9c5.chunk.js.map",
     "index.html": "/carfinder/index.html",
-    "static/css/main.50a8626a.chunk.css.map": "/carfinder/static/css/main.50a8626a.chunk.css.map",
-    "static/js/2.3755c49b.chunk.js.LICENSE.txt": "/carfinder/static/js/2.3755c49b.chunk.js.LICENSE.txt",
+    "static/css/main.b1edfa34.chunk.css.map": "/carfinder/static/css/main.b1edfa34.chunk.css.map",
+    "static/js/2.7f0fe95a.chunk.js.LICENSE.txt": "/carfinder/static/js/2.7f0fe95a.chunk.js.LICENSE.txt",
     "static/media/sports-car.3f132116.svg": "/carfinder/static/media/sports-car.3f132116.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.25ab3ea7.js",
-    "static/js/2.3755c49b.chunk.js",
-    "static/css/main.50a8626a.chunk.css",
-    "static/js/main.7a618334.chunk.js"
+    "static/js/runtime-main.9a5e90eb.js",
+    "static/js/2.7f0fe95a.chunk.js",
+    "static/css/main.b1edfa34.chunk.css",
+    "static/js/main.7f356684.chunk.js"
   ]
 }
