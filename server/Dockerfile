@@ -1,9 +1,11 @@
 FROM node:14-alpine
 ENV NODE_ENV=production
 WORKDIR /usr/src/app
+RUN npm install -g npm 
 COPY package*.json ./
-COPY schema.prisma ./
-RUN npm install && npm run codegen
+RUN npm install 
+COPY prisma/schema.prisma ./
+RUN npm run codegen
 ADD build ./build
 EXPOSE 15432
 CMD ["node", "build/carApp.js"]
