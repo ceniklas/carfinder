@@ -1,9 +1,8 @@
-# Getting Started
+# npm install
+# npm run docker:cleanup && npm run build:docker
+# docker run --name car_finder --env-file .env carfinder_image
 
 
-
-
-.env 
 # Environment variables declared in this file are automatically made available to Prisma.
 # See the documentation for more detail: https://pris.ly/d/prisma-schema#using-environment-variables
 

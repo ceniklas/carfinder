@@ -1,4 +1,4 @@
-import { Car } from "@prisma/client";
+import { Car } from '../../server/node_modules/@prisma/client'
 
 const staticValues = {
   dPrice: 15.69,

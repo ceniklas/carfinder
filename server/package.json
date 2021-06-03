@@ -1,8 +1,14 @@
 {
   "scripts": {
-    "postinstall": "yarn prisma generate --schema ../prisma/schema.prisma",
+    "build": "npx tsc",
+    "clean:data": "rm -rf build",
+    "docker:cleanup": "docker rm -f car_finder && docker rmi -f carfinder_image",
+    "prebuild:docker": "npm run build",
+    "build:docker": "docker build -t carfinder_image .",
+    "preinstall": "cp ../prisma/schema.prisma .",
+    "postinstall": "npx prisma generate && rm schema.prisma",
     "setup": "docker run --name car-finder -p 5432:5432 -e POSTGRES_PASSWORD=mysecretpassword -d postgres && yarn prisma migrate deploy",
-    "start": "yarn ts-node carApp.ts"
+    "start": "npx ts-node carApp.ts"
   },
   "dependencies": {
     "@prisma/client": "^2.24.0",

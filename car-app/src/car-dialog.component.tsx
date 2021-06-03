@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import './App.css';
-import { Car } from '@prisma/client';
+import { Car } from '../../server/node_modules/@prisma/client'
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';

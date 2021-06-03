@@ -20,7 +20,7 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "preinstall": "yarn --cwd ../server install",
+    "postinstall": "(cd ../server && npm install)",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
