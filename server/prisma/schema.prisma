@@ -4,9 +4,8 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = "postgresql://postgres:supersecret@postgres:5432/carfinderdb?schema=public"
+  url      = env("DATABASE_URL")
 }
-// # env("DATABASE_URL")
 
 model Car {
   id               Int      @id @default(autoincrement())

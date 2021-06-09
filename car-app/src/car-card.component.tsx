@@ -20,7 +20,7 @@ export const CarCard = ({ car, onClick }: { car: Car; onClick: () => any }) => {
       12 *
       parseInt(
         (
-          car.ensurance[0].match(/(?:(Halvförsäkring:.))(\d+)/g)?.[0] ?? ""
+          car.ensurance?.[0]?.match(/(?:(Halvförsäkring:.))(\d+)/g)?.[0] ?? ""
         ).split(" ")?.[1],
         10
       );

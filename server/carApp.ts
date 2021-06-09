@@ -3,7 +3,7 @@ import express from "express";
 import { carScanner } from "./bilthingy";
 
 const app = express();
-const port = 5000; //process.env.SERVER_PORT;
+const port = process.env.SERVER_PORT || 5000;
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Headers", "*");

@@ -2,9 +2,8 @@
   "scripts": {
     "build": "npx tsc",
     "clean:data": "rm -rf build",
-    "docker:cleanup": "docker rm -f car_finder && docker rmi -f carfinder_image",
-    "prebuild:docker": "npm run build",
-    "build:docker": "docker build -t carfinder_image .",
+    "clean:docker": "docker rm -f car_finder && docker rmi -f carfinder_image",
+    "docker:build": "docker build -t carfinder_image .",
     "codegen": "npx prisma generate",
     "setup": "docker run --name car-finder -p 5432:5432 -e POSTGRES_PASSWORD=mysecretpassword -d postgres && yarn prisma migrate deploy",
     "start": "npx ts-node carApp.ts",

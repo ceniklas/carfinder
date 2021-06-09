@@ -1,11 +1,27 @@
-FROM node:14-alpine
-ENV NODE_ENV=production
+FROM node:14-alpine AS builder
+
 WORKDIR /usr/src/app
-RUN npm install -g npm 
+RUN npm install -g npm
+
 COPY package*.json ./
-RUN npm install 
-COPY prisma/schema.prisma ./
+COPY prisma ./prisma
+
+RUN npm install
 RUN npm run codegen
-ADD build ./build
+
+COPY . .
+RUN npm run build
+
+FROM node:14-alpine
+
+COPY --from=builder /usr/src/app/node_modules ./node_modules
+COPY --from=builder /usr/src/app/package.*json ./
+COPY --from=builder /usr/src/app/prisma ./prisma
+COPY --from=builder /usr/src/app/build ./build
+COPY --from=builder /usr/src/app/init.sh ./
+
+RUN npm install -g npm
+
 EXPOSE 15432
-CMD ["node", "build/carApp.js"]
+CMD ["sh", "init.sh"]
+#CMD ["node", "build/carApp.js"]
