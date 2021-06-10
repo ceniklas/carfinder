@@ -31,9 +31,34 @@ app.post("/api/car/create", async (req, res) => {
     const prisma = new PrismaClient();
     const carInfo = await carScanner(carId.car_id);
     //console.log(carInfo);
-    const newCar = await prisma.car.create({ data: { ...carInfo } });
+    const newCar = await prisma.car.upsert({
+      where: {
+        car_id: carId.car_id,
+      },
+      update: { ...carInfo },
+      create: { ...carInfo },
+    });
+    //const newCar = await prisma.car.create({ data: { ...carInfo } });
     await prisma.$disconnect();
     res.end(JSON.stringify(newCar));
+  } catch (error) {
+    res.sendStatus(500);
+  }
+});
+
+app.post("/api/car/delete", async (req, res) => {
+  try {
+    const carId: Pick<Car, "car_id"> = {
+      car_id: req.body.car_id,
+    };
+    const prisma = new PrismaClient();
+    const deletedCar = await prisma.car.delete({
+      where: {
+        car_id: carId.car_id,
+      },
+    });
+    await prisma.$disconnect();
+    res.end(JSON.stringify(deletedCar));
   } catch (error) {
     res.sendStatus(500);
   }

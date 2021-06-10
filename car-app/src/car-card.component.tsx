@@ -1,11 +1,19 @@
-import { Car } from '../../server/node_modules/@prisma/client'
+import { Car } from "../../server/node_modules/@prisma/client";
+import IconButton from "@material-ui/core/IconButton";
+import DeleteIcon from "@material-ui/icons/Delete";
+import EditIcon from "@material-ui/icons/Edit";
+import { CostVisulizer } from "./cost-visulizer.component";
+import Typography from "@material-ui/core/Typography";
+import Card from "@material-ui/core/Card";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
 
-const staticValues = {
-  dPrice: 15.69,
-  bPrice: 15.39,
-  distancePerYear: 10000,
-  costReductionPerYear: 0.10,
-  years: 5,
+export type CostSummary = {
+  fuel: number;
+  ensurance: number;
+  tax: number;
+  valueReduction: number;
+  total: number;
 };
 
 const prefered = {
@@ -14,21 +22,24 @@ const prefered = {
   gear: "Auto",
 };
 
-export const CarCard = ({ car, onClick }: { car: Car; onClick: () => any }) => {
-  const calcu = () => {
-    const ensPerYear =
-      12 *
-      parseInt(
-        (
-          car.ensurance?.[0]?.match(/(?:(Halvförsäkring:.))(\d+)/g)?.[0] ?? ""
-        ).split(" ")?.[1],
-        10
-      );
+export const CarCard = ({
+  car,
+  onEdit,
+  onDelete,
+  staticValues,
+}: {
+  car: Car;
+  onEdit: () => any;
+  onDelete: () => any;
+  staticValues: any;
+}) => {
+  const calcu = (): { yearly: CostSummary; perKm: CostSummary } => {
+    const ensPerYear = 12 * parseInt(car.ensurance[1], 10);
     const ensPerKm = ensPerYear / staticValues.distancePerYear;
     const fuelCost =
       car.fuel === "Bensin" ? staticValues.bPrice : staticValues.dPrice;
     const fuelCostPerYear =
-      (fuelCost * staticValues.distancePerYear) * (car.fuel_consumption / 100);
+      fuelCost * staticValues.distancePerYear * (car.fuel_consumption / 100);
     const valueAfterYears =
       car.cost *
       Math.pow(1 - staticValues.costReductionPerYear, staticValues.years);
@@ -60,59 +71,60 @@ export const CarCard = ({ car, onClick }: { car: Car; onClick: () => any }) => {
       },
     };
   };
-  console.log(calcu())
+  
   return (
-    <div
-      onClick={onClick}
-      style={{
-        backgroundColor: "#656972",
-        padding: "1.5rem",
-        borderRadius: "0.5rem",
-        margin: "1rem 0",
-      }}
-    >
-      <div style={{ fontWeight: "bold" }}>
-        {car.id} - {car.car_id} - {car.name} ({car.year})
-      </div>
-      <div style={{ fontSize: "1rem" }}>
-        <div>
-          Bränsle:{" "}
-          <span
-            style={{
-              color: car.fuel === prefered.fuel ? "#98e988" : "#f07878",
-            }}
-          >
-            {car.fuel}
-          </span>
+    <Card variant="outlined" style={{background: 'rgb(223 223 223)', minWidth: '60rem', marginBottom: '1rem'}}>
+      <CardActions>
+        <div style={{ fontWeight: "bold" }}>
+          {car.car_id} - {car.name} ({car.year})
         </div>
-        <div>
-          Växellåda:{" "}
-          <span
-            style={{
-              color: car.gearbox.includes(prefered.gear)
-                ? "#98e988"
-                : "#f07878",
-            }}
-          >
-            {car.gearbox}
-          </span>
-        </div>
-        <div>Försäkring: {car.ensurance[0]}</div>
-        <div>Tillverkare: {car.manufacturer}</div>
-        <div>Distans: {car.milage}km</div>
-        <div>
-          Skatt:{" "}
-          <span
-            style={{ color: car.tax <= prefered.tax ? "#98e988" : "#f07878" }}
-          >
-            {car.tax}kr/år
-          </span>
-        </div>
-        <div>Värde: ~{car.value}kr</div>
-        <div>Förbrukning: {car.fuel_consumption} liter/100km</div>
-        <div>Kostnad: {car.cost}kr</div>
-        <div>TL;DR: <pre>{calcu().yearly.total}</pre></div>
-      </div>
-    </div>
+        <IconButton onClick={onEdit} style={{ marginLeft: "1rem" }}>
+          <EditIcon />
+        </IconButton>
+        <IconButton onClick={onDelete} style={{ marginLeft: "1rem" }}>
+          <DeleteIcon />
+        </IconButton>
+      </CardActions>
+      <CardContent>
+        <Typography
+          align="left"
+          variant="body1"
+          style={{ color: car.fuel === prefered.fuel ? "rgb(100 164 87)" : "#f07878" }}
+        >
+          Bränsle: {car.fuel}
+        </Typography>
+        <Typography
+          align="left"
+          variant="body1"
+          style={{
+            color: car.gearbox.includes(prefered.gear) ? "rgb(100 164 87)" : "#f07878",
+          }}
+        >
+          Växellåda: {car.gearbox}
+        </Typography>
+        <Typography align="left" variant="body1">
+          Distans: {car.milage} mil
+        </Typography>
+        <Typography
+          align="left"
+          variant="body1"
+          style={{ color: car.tax <= prefered.tax ? "rgb(100 164 87)" : "#f07878" }}
+        >
+          {car.tax}kr/år
+        </Typography>
+        <Typography align="left" variant="body1">
+          Värde: ~{car.value}kr
+        </Typography>
+        <Typography align="left" variant="body1">
+          Förbrukning: {car.fuel_consumption} liter/100km
+        </Typography>
+        <Typography align="left" variant="body1">
+          Kostnad: {car.cost} kr
+        </Typography>
+        <CostVisulizer data={calcu().yearly} />
+
+      </CardContent>
+      {/* </div> */}
+    </Card>
   );
 };

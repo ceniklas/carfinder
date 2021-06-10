@@ -9,7 +9,7 @@ async function main() {
       car_id: "BNF713",
       name: "Volvo 850 ",
       fuel: "Bensin",
-      fuel_consumption: 99,
+      fuel_consumption: 10,
       gearbox: "Manual",
       manufacturer: "Volvo",
       milage: 34000,
