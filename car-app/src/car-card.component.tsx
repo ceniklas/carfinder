@@ -71,25 +71,36 @@ export const CarCard = ({
       },
     };
   };
-  
+
   return (
-    <Card variant="outlined" style={{background: 'rgb(223 223 223)', minWidth: '60rem', marginBottom: '1rem'}}>
-      <CardActions>
+    <Card
+      variant="outlined"
+      style={{
+        background: "rgb(223 223 223)",
+        minWidth: "60rem",
+        marginBottom: "1rem",
+      }}
+    >
+      <CardActions style={{ justifyContent: "space-between" }}>
         <div style={{ fontWeight: "bold" }}>
           {car.car_id} - {car.name} ({car.year})
         </div>
-        <IconButton onClick={onEdit} style={{ marginLeft: "1rem" }}>
-          <EditIcon />
-        </IconButton>
-        <IconButton onClick={onDelete} style={{ marginLeft: "1rem" }}>
-          <DeleteIcon />
-        </IconButton>
+        <div>
+          <IconButton onClick={onEdit} style={{ marginLeft: "1rem" }}>
+            <EditIcon />
+          </IconButton>
+          <IconButton onClick={onDelete} style={{ marginLeft: "1rem" }}>
+            <DeleteIcon />
+          </IconButton>
+        </div>
       </CardActions>
       <CardContent>
         <Typography
           align="left"
           variant="body1"
-          style={{ color: car.fuel === prefered.fuel ? "rgb(100 164 87)" : "#f07878" }}
+          style={{
+            color: car.fuel === prefered.fuel ? "rgb(100 164 87)" : "#f07878",
+          }}
         >
           Bränsle: {car.fuel}
         </Typography>
@@ -97,7 +108,9 @@ export const CarCard = ({
           align="left"
           variant="body1"
           style={{
-            color: car.gearbox.includes(prefered.gear) ? "rgb(100 164 87)" : "#f07878",
+            color: car.gearbox.includes(prefered.gear)
+              ? "rgb(100 164 87)"
+              : "#f07878",
           }}
         >
           Växellåda: {car.gearbox}
@@ -108,7 +121,9 @@ export const CarCard = ({
         <Typography
           align="left"
           variant="body1"
-          style={{ color: car.tax <= prefered.tax ? "rgb(100 164 87)" : "#f07878" }}
+          style={{
+            color: car.tax <= prefered.tax ? "rgb(100 164 87)" : "#f07878",
+          }}
         >
           {car.tax}kr/år
         </Typography>
@@ -122,9 +137,7 @@ export const CarCard = ({
           Kostnad: {car.cost} kr
         </Typography>
         <CostVisulizer data={calcu().yearly} />
-
       </CardContent>
-      {/* </div> */}
     </Card>
   );
 };
