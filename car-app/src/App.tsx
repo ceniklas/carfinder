@@ -9,6 +9,7 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import Slider from "@material-ui/core/Slider";
+import GridList from "@material-ui/core/GridList";
 
 const baseUrl = "http://server.ceniklas.se:15432/api";
 //const baseUrl = "http://localhost:15432/api";
@@ -72,10 +73,13 @@ const App = () => {
   };
 
   const onYearSliderChange = (event: any, value: any) => {
-    setStaticValues({...staticValues, years: value});
+    setStaticValues({ ...staticValues, years: value });
   };
   const onDistanceSliderChange = (event: any, value: any) => {
-    setStaticValues({...staticValues, distancePerYear: value});
+    setStaticValues({ ...staticValues, distancePerYear: value });
+  };
+  const onValuereductionSliderChange = (event: any, value: any) => {
+    setStaticValues({ ...staticValues, costReductionPerYear: value/100 });
   };
 
   useEffect(() => {
@@ -91,31 +95,49 @@ const App = () => {
     <>
       <div className="App">
         <header className="App-header">
-          <div style={{ width: "8rem" }}>
-            <Typography id="discrete-slider" gutterBottom>
-              Livslängd (år)
-            </Typography>
-            <Slider
-              value={staticValues.years}
-              onChange={onYearSliderChange}
-              aria-labelledby="discrete-slider"
-              valueLabelDisplay="auto"
-              min={1}
-              max={15}
-            />
-            <Typography id="discrete-slider" gutterBottom>
-              Distans (km)
-            </Typography>
-            <Slider
-              value={staticValues.distancePerYear}
-              onChange={onDistanceSliderChange}
-              aria-labelledby="discrete-slider"
-              valueLabelDisplay="auto"
-              step={1000}
-              min={1}
-              max={100000}
-            />
-          </div>
+          <GridList cellHeight={"auto"} cols={3}>
+            <div style={{ width: "12rem", marginRight: "1rem" }}>
+              <Typography id="discrete-slider" gutterBottom>
+                Livslängd (år)
+              </Typography>
+              <Slider
+                value={staticValues.years}
+                onChange={onYearSliderChange}
+                aria-labelledby="discrete-slider"
+                valueLabelDisplay="auto"
+                min={1}
+                max={15}
+              />
+            </div>
+            <div style={{ width: "12rem", marginRight: "1rem" }}>
+              <Typography id="discrete-slider" gutterBottom>
+                Distans (km)
+              </Typography>
+              <Slider
+                value={staticValues.distancePerYear}
+                onChange={onDistanceSliderChange}
+                aria-labelledby="discrete-slider"
+                valueLabelDisplay="auto"
+                step={1000}
+                min={1}
+                max={100000}
+              />
+            </div>
+            <div style={{ width: "12rem", marginRight: "1rem" }}>
+              <Typography id="discrete-slider" gutterBottom>
+                Värdeminskning (%/år)
+              </Typography>
+              <Slider
+                value={staticValues.costReductionPerYear * 100}
+                onChange={onValuereductionSliderChange}
+                aria-labelledby="discrete-slider"
+                valueLabelDisplay="auto"
+                step={0.01}
+                min={0.001}
+                max={100}
+              />
+            </div>
+          </GridList>
           <div className="App-header-title">
             <h1>Brum</h1>
             <img src={carImage} className="App-logo" alt="logo" />
@@ -147,15 +169,22 @@ const App = () => {
           </div>
         </header>
         <div className="App-body">
-          {cars.map((car) => (
-            <CarCard
-              key={car.id}
-              car={car}
-              onEdit={() => handleOpen(car)}
-              onDelete={() => handleDelete(car)}
-              staticValues={staticValues}
-            />
-          ))}
+          <GridList cellHeight={"auto"} cols={3}>
+            {cars.map((car) => (
+              <CarCard
+                key={car.id}
+                car={car}
+                onEdit={() => handleOpen(car)}
+                onDelete={() => handleDelete(car)}
+                staticValues={staticValues}
+              />
+            ))}
+            {/* {tileData.map((tile) => (
+            <GridListTile key={tile.img} cols={tile.cols || 1}>
+              <img src={tile.img} alt={tile.title} />
+            </GridListTile> 
+          ))} */}
+          </GridList>
         </div>
       </div>
       <CarDialog car={selectedCar} open={open} handleClose={handleClose} />

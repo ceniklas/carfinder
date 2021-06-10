@@ -17,7 +17,8 @@ export type CostSummary = {
 };
 
 const prefered = {
-  tax: 1500,
+  tax: 2000,
+  milage: 20000,
   fuel: "Diesel",
   gear: "Auto",
 };
@@ -33,6 +34,8 @@ export const CarCard = ({
   onDelete: () => any;
   staticValues: any;
 }) => {
+  const priceSale = () => Math.floor((car.cost / car.value) * 100) - 100;
+
   const calcu = (): { yearly: CostSummary; perKm: CostSummary } => {
     const ensPerYear = 12 * parseInt(car.ensurance[1], 10);
     const ensPerKm = ensPerYear / staticValues.distancePerYear;
@@ -51,23 +54,25 @@ export const CarCard = ({
 
     return {
       yearly: {
-        fuel: fuelCostPerYear,
+        fuel: Math.floor(fuelCostPerYear),
         ensurance: ensPerYear,
         tax: car.tax,
         valueReduction: valueReductionPerKmPerYear,
-        total:
-          fuelCostPerYear + ensPerYear + car.tax + valueReductionPerKmPerYear,
+        total: Math.floor(
+          fuelCostPerYear + ensPerYear + car.tax + valueReductionPerKmPerYear
+        ),
       },
       perKm: {
-        fuel: (fuelCost * car.fuel_consumption) / 100,
+        fuel: Math.floor((fuelCost * car.fuel_consumption) / 100),
         ensurance: ensPerKm,
         tax: car.tax / staticValues.distancePerYear,
         valueReduction: valueReductionPerKm,
-        total:
+        total: Math.floor(
           (fuelCost * car.fuel_consumption) / 100 +
-          ensPerKm +
-          car.tax / staticValues.distancePerYear +
-          valueReductionPerKm,
+            ensPerKm +
+            car.tax / staticValues.distancePerYear +
+            valueReductionPerKm
+        ),
       },
     };
   };
@@ -77,8 +82,7 @@ export const CarCard = ({
       variant="outlined"
       style={{
         background: "rgb(223 223 223)",
-        minWidth: "60rem",
-        marginBottom: "1rem",
+        margin: "1rem",
       }}
     >
       <CardActions style={{ justifyContent: "space-between" }}>
@@ -115,7 +119,14 @@ export const CarCard = ({
         >
           Växellåda: {car.gearbox}
         </Typography>
-        <Typography align="left" variant="body1">
+        <Typography
+          align="left"
+          variant="body1"
+          style={{
+            color:
+              car.milage <= prefered.milage ? "rgb(100 164 87)" : "#f07878",
+          }}
+        >
           Distans: {car.milage} mil
         </Typography>
         <Typography
@@ -133,8 +144,17 @@ export const CarCard = ({
         <Typography align="left" variant="body1">
           Förbrukning: {car.fuel_consumption} liter/100km
         </Typography>
-        <Typography align="left" variant="body1">
-          Kostnad: {car.cost} kr
+        <Typography
+          align="left"
+          variant="body1"
+          style={{
+            color: priceSale() <= 0 ? "rgb(100 164 87)" : "#f07878",
+          }}
+        >
+          Kostnad: {car.cost} kr{" "}
+          {`(${Math.abs(priceSale())}% ${
+            priceSale() <= 0 ? "billigare" : " dyrare"
+          }  än värdering)`}
         </Typography>
         <CostVisulizer data={calcu().yearly} />
       </CardContent>
