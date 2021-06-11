@@ -16,3 +16,7 @@ DATABASE_URL="postgresql://postgres:<pass>@localhost:5432/carfinderdb?schema=pub
 # yarn prisma migrate deploy
 # docker exec -it car-finder bash
 # psql -h localhost -p 5432 -U postgres -d postgres
+
+# https://www.spritmonitor.de/en/overview/51-Volvo/467-S60.html?fueltype=2&exactmodel=t5
+# https://www.auto-data.net/se/bmw-3-series-sedan-e90-320d-163hp-9928
+# https://www.auto-data.net/se/results?search=Citro%C3%ABn+C5+Wagon+3.0+V6+Automat+200

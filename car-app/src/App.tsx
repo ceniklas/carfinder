@@ -79,7 +79,7 @@ const App = () => {
     setStaticValues({ ...staticValues, distancePerYear: value });
   };
   const onValuereductionSliderChange = (event: any, value: any) => {
-    setStaticValues({ ...staticValues, costReductionPerYear: value/100 });
+    setStaticValues({ ...staticValues, costReductionPerYear: value / 100 });
   };
 
   useEffect(() => {
@@ -94,60 +94,62 @@ const App = () => {
   return (
     <>
       <div className="App">
-        <header className="App-header">
+        <GridList className="App-header" cellHeight={"auto"} cols={3}>
           <GridList cellHeight={"auto"} cols={3}>
-            <div style={{ width: "12rem", marginRight: "1rem" }}>
-              <Typography id="discrete-slider" gutterBottom>
-                Livslängd (år)
-              </Typography>
-              <Slider
-                value={staticValues.years}
-                onChange={onYearSliderChange}
-                aria-labelledby="discrete-slider"
-                valueLabelDisplay="auto"
-                min={1}
-                max={15}
-              />
-            </div>
-            <div style={{ width: "12rem", marginRight: "1rem" }}>
-              <Typography id="discrete-slider" gutterBottom>
-                Distans (km)
-              </Typography>
-              <Slider
-                value={staticValues.distancePerYear}
-                onChange={onDistanceSliderChange}
-                aria-labelledby="discrete-slider"
-                valueLabelDisplay="auto"
-                step={1000}
-                min={1}
-                max={100000}
-              />
-            </div>
-            <div style={{ width: "12rem", marginRight: "1rem" }}>
-              <Typography id="discrete-slider" gutterBottom>
-                Värdeminskning (%/år)
-              </Typography>
-              <Slider
-                value={staticValues.costReductionPerYear * 100}
-                onChange={onValuereductionSliderChange}
-                aria-labelledby="discrete-slider"
-                valueLabelDisplay="auto"
-                step={0.01}
-                min={0.001}
-                max={100}
-              />
+            <div style={{ width: "42rem", display: 'inline-flex' }}>
+              <div style={{ width: "12rem", margin: "1rem" }}>
+                <Typography id="discrete-slider" gutterBottom>
+                  Livslängd (år)
+                </Typography>
+                <Slider
+                  value={staticValues.years}
+                  onChange={onYearSliderChange}
+                  aria-labelledby="discrete-slider"
+                  valueLabelDisplay="auto"
+                  min={1}
+                  max={15}
+                />
+              </div>
+              <div style={{ width: "12rem", margin: "1rem" }}>
+                <Typography id="discrete-slider" gutterBottom>
+                  Distans (km)
+                </Typography>
+                <Slider
+                  value={staticValues.distancePerYear}
+                  onChange={onDistanceSliderChange}
+                  aria-labelledby="discrete-slider"
+                  valueLabelDisplay="auto"
+                  step={1000}
+                  min={1}
+                  max={100000}
+                />
+              </div>
+              <div style={{ width: "12rem", margin: "1rem" }}>
+                <Typography id="discrete-slider" gutterBottom>
+                  Värdeminskning (%/år)
+                </Typography>
+                <Slider
+                  value={staticValues.costReductionPerYear * 100}
+                  onChange={onValuereductionSliderChange}
+                  aria-labelledby="discrete-slider"
+                  valueLabelDisplay="auto"
+                  step={0.01}
+                  min={0.001}
+                  max={100}
+                />
+              </div>
             </div>
           </GridList>
           <div className="App-header-title">
-            <h1>Brum</h1>
+            <Typography variant="h1">Brum</Typography>
             <img src={carImage} className="App-logo" alt="logo" />
           </div>
           <div
             style={{
               background: "white",
               padding: "1rem",
-              display: "flex",
               borderRadius: "4px",
+              width: "21rem",
             }}
           >
             <TextField
@@ -167,7 +169,7 @@ const App = () => {
               Add Car
             </Button>
           </div>
-        </header>
+        </GridList>
         <div className="App-body">
           <GridList cellHeight={"auto"} cols={3}>
             {cars.map((car) => (
