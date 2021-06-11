@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/carfinder/static/css/main.b1edfa34.chunk.css",
-    "main.js": "/carfinder/static/js/main.2f217197.chunk.js",
-    "main.js.map": "/carfinder/static/js/main.2f217197.chunk.js.map",
+    "main.css": "/carfinder/static/css/main.28d40d0a.chunk.css",
+    "main.js": "/carfinder/static/js/main.98d92e54.chunk.js",
+    "main.js.map": "/carfinder/static/js/main.98d92e54.chunk.js.map",
     "runtime-main.js": "/carfinder/static/js/runtime-main.340eaf6e.js",
     "runtime-main.js.map": "/carfinder/static/js/runtime-main.340eaf6e.js.map",
     "static/js/2.610e3972.chunk.js": "/carfinder/static/js/2.610e3972.chunk.js",
@@ -10,14 +10,14 @@
     "static/js/3.25f4fe68.chunk.js": "/carfinder/static/js/3.25f4fe68.chunk.js",
     "static/js/3.25f4fe68.chunk.js.map": "/carfinder/static/js/3.25f4fe68.chunk.js.map",
     "index.html": "/carfinder/index.html",
-    "static/css/main.b1edfa34.chunk.css.map": "/carfinder/static/css/main.b1edfa34.chunk.css.map",
+    "static/css/main.28d40d0a.chunk.css.map": "/carfinder/static/css/main.28d40d0a.chunk.css.map",
     "static/js/2.610e3972.chunk.js.LICENSE.txt": "/carfinder/static/js/2.610e3972.chunk.js.LICENSE.txt",
     "static/media/sports-car.3f132116.svg": "/carfinder/static/media/sports-car.3f132116.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.340eaf6e.js",
     "static/js/2.610e3972.chunk.js",
-    "static/css/main.b1edfa34.chunk.css",
-    "static/js/main.2f217197.chunk.js"
+    "static/css/main.28d40d0a.chunk.css",
+    "static/js/main.98d92e54.chunk.js"
   ]
 }
