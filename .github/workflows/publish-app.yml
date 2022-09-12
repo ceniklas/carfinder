@@ -22,7 +22,7 @@ jobs:
       working-directory: ./carfinder
 
     - name: Build
-      run: pnpm build --base carfinder
+      run: pnpm build
       working-directory: ./carfinder
 
     - name: Deploy
