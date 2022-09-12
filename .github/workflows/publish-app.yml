@@ -4,22 +4,31 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
+
+    - uses: pnpm/action-setup@v2.2.2
+      with:
+        version: 7.11.0
+
     - name: Setup server
-      run: touch .env && echo 'DATABASE_URL="postgresql://postgres:notarealpass@localhost:5432/carfinderdb?schema=public"' > .env && yarn install
+      run: touch .env && echo 'DATABASE_URL="postgresql://postgres:notarealpass@localhost:5432/carfinderdb?schema=public"' > .env && npm install
       working-directory: ./server
+
     - name: Setup client
-      run: yarn install
-      working-directory: ./car-app
+      run: pnpm install
+      working-directory: ./carfinder
+
     - name: Build
-      run: yarn build
-      working-directory: ./car-app
+      run: pnpm build --base carfinder
+      working-directory: ./carfinder
+
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_branch: app-master  # default: gh-pages
-        publish_dir: ./car-app/build  # default: public
+        publish_dir: ./carfinder/dist  # default: public
         cname: ceniklas.se/carfinder
