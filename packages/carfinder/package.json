@@ -1,6 +1,5 @@
 {
-  "name": "carfinder",
-  "private": true,
+  "name": "carfinder-react-app",
   "version": "0.2.0",
   "type": "module",
   "homepage": "https://ceniklas.github.io/carfinder",

@@ -1,4 +1,7 @@
 {
+  "name": "carfinder-server",
+  "version": "0.2.0",
+  "type": "module",
   "scripts": {
     "build": "npx tsc",
     "clean:data": "rm -rf build",
