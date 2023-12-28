@@ -25,15 +25,15 @@ app.get("/api/cars", async (req, res) => {
 
 app.post("/api/car/create", async (req, res) => {
   try {
-    const carId: Pick<Car, "car_id"> = {
-      car_id: req.body.car_id,
+    const carId: Pick<Car, "carId"> = {
+      carId: req.body.carId,
     };
     const prisma = new PrismaClient();
-    const carInfo = await carScanner(carId.car_id);
+    const carInfo = await carScanner(carId.carId);
     //console.log(carInfo);
     const newCar = await prisma.car.upsert({
       where: {
-        car_id: carId.car_id,
+        carId: carId.carId,
       },
       update: { ...carInfo },
       create: { ...carInfo },
@@ -48,13 +48,13 @@ app.post("/api/car/create", async (req, res) => {
 
 app.post("/api/car/delete", async (req, res) => {
   try {
-    const carId: Pick<Car, "car_id"> = {
-      car_id: req.body.car_id,
+    const carId: Pick<Car, "carId"> = {
+      carId: req.body.carId,
     };
     const prisma = new PrismaClient();
     const deletedCar = await prisma.car.delete({
       where: {
-        car_id: carId.car_id,
+        carId: carId.carId,
       },
     });
     await prisma.$disconnect();
@@ -68,18 +68,19 @@ app.post("/api/car/update", async (req, res) => {
   try {
     const car: Car = {
       id: parseInt(req.body.id, 10),
-      car_id: req.body.car_id,
+      carId: req.body.carId,
       ensurance: req.body.ensurance,
       fuel: req.body.fuel,
       gearbox: req.body.gearbox,
       manufacturer: req.body.manufacturer,
       milage: parseInt(req.body.milage, 10),
       name: req.body.name,
-      tax: parseInt(req.body.tax, 10),
-      value: parseInt(req.body.value, 10),
-      year: parseInt(req.body.year, 10),
-      fuel_consumption: parseInt(req.body.fuel_consumption, 10),
-      cost: parseInt(req.body.cost, 10),
+      taxYearly: parseInt(req.body.tax, 10),
+      estimatedValue: parseInt(req.body.value, 10),
+      modelYear: parseInt(req.body.year, 10),
+      fuelConsumption: parseInt(req.body.fuel_consumption, 10),
+      listedPrice: parseInt(req.body.cost, 10),
+      userId: null,
     };
     const prisma = new PrismaClient();
     const updatedCar = await prisma.car.update({

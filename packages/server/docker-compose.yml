@@ -3,19 +3,19 @@ services:
   postgres:
     image: postgres
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: supersecret
+      POSTGRES_USER: test
+      POSTGRES_PASSWORD: test
       POSTGRES_DB: mydb
-  web:
-    image: carfinder_image
-    build:
-      context: .
-      dockerfile: ./Dockerfile
-    depends_on:
-      - postgres
-    environment:
-      SERVER_PORT: 15432
-      DATABASE_URL: postgresql://postgres:supersecret@postgres:5432/mydb?schema=public
-    ports:
-      - 15432:15432
-      - 5555:5555
+  # web:
+  #   image: carfinder_image
+  #   build:
+  #     context: .
+  #     dockerfile: ./Dockerfile
+  #   depends_on:
+  #     - postgres
+  #   environment:
+  #     SERVER_PORT: 15432
+  #     DATABASE_URL: postgresql://test:test@postgres:5432/mydb?schema=public
+  #   ports:
+  #     - 15432:15432
+  #     - 5555:5555

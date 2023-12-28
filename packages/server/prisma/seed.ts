@@ -3,21 +3,21 @@ const prisma = new PrismaClient();
 
 async function main() {
   const banana = await prisma.car.upsert({
-    where: { car_id: "BNF713" },
+    where: { carId: "BNF713" },
     update: {},
     create: {
-      car_id: "BNF713",
+      carId: "BNF713",
       name: "Volvo 850 ",
       fuel: "Bensin",
-      fuel_consumption: 10,
+      fuelConsumption: 10,
       gearbox: "Manual",
       manufacturer: "Volvo",
       milage: 34000,
-      tax: 3500,
-      value: 5000,
-      year: 1997,
+      taxYearly: 3500,
+      estimatedValue: 5000,
+      modelYear: 1997,
       ensurance: ["Halvförsäkring: 123"],
-      cost: 0,
+      listedPrice: 0,
     },
   });
 
